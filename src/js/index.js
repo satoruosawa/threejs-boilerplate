@@ -1,11 +1,26 @@
-import sayHello from './hello'
-import * as es6Functions from './Es6Functions'
-import Polygon from './TestClass'
-import '../css/index.scss'
+import * as Three from 'three'
 
-document.getElementById('root').innerHTML = sayHello()
+const scene = new Three.Scene()
+const camera = new Three.PerspectiveCamera(
+  75, window.innerWidth / window.innerHeight, 0.1, 1000
+)
 
-es6Functions.arrowFunction()
-es6Functions.powerExponent(3)
-es6Functions.asyncFunction()
-console.log('class test:', new Polygon(4, 3).area)
+const renderer = new Three.WebGLRenderer()
+renderer.setSize(window.innerWidth, window.innerHeight)
+document.body.appendChild(renderer.domElement)
+
+const geometry = new Three.BoxGeometry(1, 1, 1)
+const material = new Three.MeshBasicMaterial({ color: 0x00ff00 })
+const cube = new Three.Mesh(geometry, material)
+scene.add(cube)
+
+camera.position.z = 5
+
+const animate = function () {
+  window.requestAnimationFrame(animate)
+  cube.rotation.x += 0.1
+  cube.rotation.y += 0.1
+  renderer.render(scene, camera)
+}
+
+animate()
