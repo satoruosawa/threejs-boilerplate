@@ -1,5 +1,7 @@
 import * as Three from 'three'
 
+import '../css/index.scss'
+
 const scene = new Three.Scene()
 const camera = new Three.PerspectiveCamera(
   75, window.innerWidth / window.innerHeight, 0.1, 1000
